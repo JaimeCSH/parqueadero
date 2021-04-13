@@ -1,0 +1,1 @@
+select count(1) from vehiculo where id <> :id and placa = :placa

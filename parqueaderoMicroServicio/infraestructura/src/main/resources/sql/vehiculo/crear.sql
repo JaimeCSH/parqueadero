@@ -1,0 +1,1 @@
+insert into vehiculo (cliente, placa) values (:cliente, :placa)

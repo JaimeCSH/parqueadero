@@ -1,0 +1,1 @@
+select count(1) from servicio where vehiculo = :vehiculo and activo = 1
