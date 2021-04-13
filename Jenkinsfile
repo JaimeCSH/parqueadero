@@ -41,7 +41,7 @@ pipeline {
       steps{
         echo "------------>Compile & Unit Tests<------------"
 		
-		sh 'gradlew --b ./parqueaderoMicroServicio/build.gradle test'
+		sh 'gradle --b ./parqueaderoMicroServicio/build.gradle test'
       }
     }
 
@@ -57,7 +57,7 @@ pipeline {
     stage('Build') {
       steps {
         echo "------------>Build<------------"
-		sh 'gradlew --b ./parqueaderoMicroServicio/build.gradle build -x test'
+		sh 'gradle --b ./parqueaderoMicroServicio/build.gradle build -x test'
       }
     }  
   }
