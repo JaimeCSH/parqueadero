@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ManejadorListarClientes {
 
-
     private final DaoCliente daoCliente;
 
     public ManejadorListarClientes(DaoCliente daoCliente){

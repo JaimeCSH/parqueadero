@@ -6,7 +6,7 @@ import com.ceiba.vehiculo.puerto.repositorio.RepositorioVehiculo;
 
 public class ServicioCrearVehiculo {
 
-    private static final String EL_VEHICULO_YA_EXISTE_EN_EL_SISTEMA = "El VEHICULO ya existe en el sistema";
+    private static final String EL_VEHICULO_YA_EXISTE_EN_EL_SISTEMA = "El vehículo ya existe en el sistema";
 
     private final RepositorioVehiculo repositorioVehiculo;
 

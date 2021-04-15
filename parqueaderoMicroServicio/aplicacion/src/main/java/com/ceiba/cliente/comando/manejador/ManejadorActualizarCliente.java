@@ -5,10 +5,11 @@ import com.ceiba.cliente.comando.ComandoCliente;
 import com.ceiba.cliente.comando.fabrica.FabricaCliente;
 import com.ceiba.cliente.modelo.entidad.Cliente;
 import com.ceiba.cliente.servicio.ServicioActualizarCliente;
+import com.ceiba.manejador.ManejadorComando;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ManejadorActualizarCliente {
+public class ManejadorActualizarCliente implements ManejadorComando<ComandoCliente> {
 
     private final FabricaCliente fabricaCliente;
     private final ServicioActualizarCliente servicioActualizarCliente;

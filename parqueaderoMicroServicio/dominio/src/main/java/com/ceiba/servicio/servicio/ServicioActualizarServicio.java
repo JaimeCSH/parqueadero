@@ -1,6 +1,7 @@
 package com.ceiba.servicio.servicio;
 
 import com.ceiba.dominio.excepcion.ExcepcionServicioActivo;
+import com.ceiba.dominio.excepcion.ExcepcionServicioNoActivo;
 import com.ceiba.servicio.modelo.entidad.Servicio;
 import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
 
@@ -10,7 +11,7 @@ import java.time.temporal.ChronoUnit;
 
 public class ServicioActualizarServicio {
 
-    private static final String VEHICULO_ACTIVO = "El vehiculo se encuentra actualmente en el parqueadero";
+    private static final String VEHICULO_NO_ACTIVO = "No se encuentra un servicio activo para este vehículo";
     private final RepositorioServicio repositorioServicio;
 
     public ServicioActualizarServicio(RepositorioServicio repositorioServicio) {
@@ -18,6 +19,7 @@ public class ServicioActualizarServicio {
     }
 
     public void ejecutar(Servicio servicio) {
+        validarExistenciaNoActiva(servicio);
         estabelcerHoraSalida(servicio);
         calcularTotalHoras(servicio);
         calcularTotalAPagar(servicio);
@@ -25,18 +27,21 @@ public class ServicioActualizarServicio {
         this.repositorioServicio.actualizar(servicio);
     }
 
-    private void calcularTotalHoras(Servicio servicio) {
+    public void calcularTotalHoras(Servicio servicio) {
 
         LocalDateTime fechayHoraInicial=servicio.getFechaEntrada();
         LocalDateTime fechayHoraFinal=servicio.getFechaSalida();
+        Long minutes = ChronoUnit.MINUTES.between(fechayHoraInicial,fechayHoraFinal);
         Long horas = ChronoUnit.HOURS.between(fechayHoraInicial,fechayHoraFinal);
 
-        //Falta sumar una hora mas cuando se pase por unos minutos de una hora exacta
+        if(minutes%60!=0){
+            horas++;
+        }
 
         servicio.setHoras(horas);
     }
 
-    private void calcularTotalAPagar(Servicio servicio){
+    public void calcularTotalAPagar(Servicio servicio){
         int tarifaUnica=2000;
         BigDecimal total= BigDecimal.valueOf(servicio.getHoras()*tarifaUnica);
         servicio.setValorAPagar(total);
@@ -48,10 +53,10 @@ public class ServicioActualizarServicio {
         servicio.setFechaSalida(fechaSalida);
     }
 
-    private void validarExistenciaActiva(Servicio servicio) {
+    private void validarExistenciaNoActiva(Servicio servicio) {
         boolean existeActivo = this.repositorioServicio.existeActivo(servicio.getId());
-        if(existeActivo) {
-            throw new ExcepcionServicioActivo(VEHICULO_ACTIVO);
+        if(!existeActivo) {
+            throw new ExcepcionServicioNoActivo(VEHICULO_NO_ACTIVO);
         }
     }
 }

@@ -6,7 +6,7 @@ import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
 
 public class ServicioCrearServicio {
 
-    private static final String VEHICULO_ACTIVO = "El vehiculo se encuentra actualmente en el parqueadero";
+    private static final String VEHICULO_ACTIVO = "Ya se encuentra un servicio activo para este vehículo";
     private final RepositorioServicio repositorioServicio;
 
     public ServicioCrearServicio(RepositorioServicio repositorioServicio) {

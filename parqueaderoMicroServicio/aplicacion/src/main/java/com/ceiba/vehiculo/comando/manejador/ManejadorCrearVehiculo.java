@@ -1,6 +1,7 @@
 package com.ceiba.vehiculo.comando.manejador;
 
 import com.ceiba.ComandoRespuesta;
+import com.ceiba.manejador.ManejadorComandoRespuesta;
 import com.ceiba.vehiculo.comando.ComandoVehiculo;
 import com.ceiba.vehiculo.comando.fabrica.FabricaVehiculo;
 import com.ceiba.vehiculo.modelo.entidad.Vehiculo;
@@ -8,7 +9,7 @@ import com.ceiba.vehiculo.servicio.ServicioCrearVehiculo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ManejadorCrearVehiculo {
+public class ManejadorCrearVehiculo implements ManejadorComandoRespuesta<ComandoVehiculo,ComandoRespuesta<Long>> {
 
     private final FabricaVehiculo fabricaVehiculo;
     private final ServicioCrearVehiculo servicioCrearVehiculo;

@@ -45,9 +45,9 @@ public class RepositorioClienteMysql implements RepositorioCliente {
     }
 
     @Override
-    public boolean existe(String nombre) {
+    public boolean existe(Long cedula) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("nombre", nombre);
+        paramSource.addValue("cedula", cedula);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
     }
@@ -58,10 +58,10 @@ public class RepositorioClienteMysql implements RepositorioCliente {
     }
 
     @Override
-    public boolean existeExcluyendoId(Long id, String nombre) {
+    public boolean existeExcluyendoId(Long id, Long cedula) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
-        paramSource.addValue("nombre", nombre);
+        paramSource.addValue("cedula", cedula);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteExcluyendoId,paramSource, Boolean.class);
     }

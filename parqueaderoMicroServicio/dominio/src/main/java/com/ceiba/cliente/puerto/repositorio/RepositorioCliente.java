@@ -24,15 +24,15 @@ public interface RepositorioCliente {
 
     /**
      * Permite validar si existe un cliente con un nombre
-     * @param nombre
+     * @param cedula
      * @return si existe o no
      */
-    boolean existe(String nombre);
+    boolean existe(Long cedula);
 
     /**
      * Permite validar si existe un cliente con un nombre excluyendo un id
-     * @param nombre
+     * @param cedula
      * @return si existe o no
      */
-    boolean existeExcluyendoId(Long id,String nombre);
+    boolean existeExcluyendoId(Long id,Long cedula);
 }

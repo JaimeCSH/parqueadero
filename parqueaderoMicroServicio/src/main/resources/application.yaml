@@ -15,7 +15,7 @@ spring:
       driver-class-name: com.mysql.jdbc.Driver
       type: com.zaxxer.hikari.HikariDataSource
       jdbcUrl: jdbc:mysql://localhost:3306/parqueadero
-      username: root
-      password: 
+      username: ceiba
+      password: ceiba
       hikari:
          poolName: pool
