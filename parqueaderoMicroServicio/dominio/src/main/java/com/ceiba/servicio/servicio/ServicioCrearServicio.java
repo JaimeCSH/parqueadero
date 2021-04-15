@@ -17,8 +17,8 @@ public class ServicioCrearServicio {
     }
 
     public Long ejecutar(Servicio servicio) {
-        validarExistenciaVehiculo(servicio);
         validarExistenciaActiva(servicio);
+        validarExistenciaVehiculo(servicio);
         return this.repositorioServicio.crear(servicio);
     }
 

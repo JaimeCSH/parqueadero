@@ -1,5 +1,6 @@
 package com.ceiba.servicio.comando.manejador;
 
+import com.ceiba.ComandoRespuesta;
 import com.ceiba.manejador.ManejadorComando;
 import com.ceiba.manejador.ManejadorComandoRespuesta;
 import com.ceiba.servicio.comando.ComandoServicio;
