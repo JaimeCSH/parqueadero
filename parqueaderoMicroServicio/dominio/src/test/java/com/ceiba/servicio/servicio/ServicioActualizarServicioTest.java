@@ -2,6 +2,7 @@ package com.ceiba.servicio.servicio;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionNoExiste;
 import com.ceiba.dominio.excepcion.ExcepcionServicioNoActivo;
 import com.ceiba.servicio.modelo.entidad.Servicio;
 import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
@@ -25,7 +26,7 @@ public class ServicioActualizarServicioTest {
         ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio);
         Mockito.when(repositorioServicio.existeActivo(Mockito.anyLong())).thenReturn(false);
         // act - assert
-        BasePrueba.assertThrows(() -> servicioActualizarServicio.ejecutar(servicio), ExcepcionServicioNoActivo.class,"No se encuentra un servicio activo para este vehículo");
+        BasePrueba.assertThrows(() -> servicioActualizarServicio.ejecutar(servicio), ExcepcionNoExiste.class,"El servicio no existe");
     }
 
     @Test
