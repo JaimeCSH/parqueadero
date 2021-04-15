@@ -37,15 +37,12 @@ public class Servicio {
         this.horas=horas;
     }
 
-    public Servicio(Long id, LocalDateTime fechaEntrada ,LocalDateTime fechaSalida, Integer activo,
-                    BigDecimal valorAPagar, Long horas) {
+    public Servicio(Long id,Long vehiculo, LocalDateTime fechaEntrada ) {
 
         this.id = id;
+        this.vehiculo=vehiculo;
         this.fechaEntrada= fechaEntrada;
-        this.fechaSalida = fechaSalida;
-        this.activo = activo;
-        this.valorAPagar=valorAPagar;
-        this.horas=horas;
+
     }
 
     public void setFechaSalida(LocalDateTime fechaSalida) {

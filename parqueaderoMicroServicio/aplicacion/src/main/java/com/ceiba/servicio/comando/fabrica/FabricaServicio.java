@@ -21,11 +21,8 @@ public class FabricaServicio {
     public Servicio actualizar(ComandoServicio comandoServicio) {
         return new Servicio(
                 comandoServicio.getId(),
-                comandoServicio.getFechaEntrada(),
-                comandoServicio.getFechaSalida(),
-                comandoServicio.getActivo(),
-                comandoServicio.getValorAPagar(),
-                comandoServicio.getHoras()
+                comandoServicio.getVehiculo(),
+                comandoServicio.getFechaEntrada()
         );
     }
 }

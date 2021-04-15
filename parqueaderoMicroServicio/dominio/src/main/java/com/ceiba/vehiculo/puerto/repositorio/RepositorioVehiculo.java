@@ -37,4 +37,11 @@ public interface RepositorioVehiculo {
      * @return si existe o no
      */
     boolean existeExcluyendoId(Long id,String placa);
+
+    /**
+     * Permite validar si existe un cliente para crear el vehiculo
+     * @param cliente
+     * @return si existe o no
+     */
+    boolean existeCliente(Long cliente);
 }

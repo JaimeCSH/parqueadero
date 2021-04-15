@@ -1,6 +1,5 @@
 package com.ceiba.vehiculo.adaptador.repositorio;
 
-import com.ceiba.cliente.modelo.entidad.Cliente;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.vehiculo.modelo.entidad.Vehiculo;
@@ -27,6 +26,9 @@ public class RepositorioVehiculoMysql implements RepositorioVehiculo {
 
     @SqlStatement(namespace="vehiculo", value="existeExcluyendoId")
     private static String sqlExisteExcluyendoId;
+
+    @SqlStatement(namespace="vehiculo", value="existeCliente")
+    private static String sqlExisteCliente;
 
     public RepositorioVehiculoMysql (CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate){
         this.customNamedParameterJdbcTemplate=customNamedParameterJdbcTemplate;
@@ -65,5 +67,12 @@ public class RepositorioVehiculoMysql implements RepositorioVehiculo {
         paramSource.addValue("placa", placa);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteExcluyendoId,paramSource, Boolean.class);
+    }
+
+    @Override
+    public boolean existeCliente(Long cliente){
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("cliente", cliente);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteCliente,paramSource, Boolean.class);
     }
 }

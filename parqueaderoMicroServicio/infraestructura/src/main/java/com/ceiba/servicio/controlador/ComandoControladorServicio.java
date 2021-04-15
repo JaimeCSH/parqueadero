@@ -55,7 +55,9 @@ public class ComandoControladorServicio {
     @ApiOperation("Actualizar servicio")
     public void actualizar(@RequestBody ComandoServicio comandoServicio,@PathVariable Long id) {
 
+
         DtoServicio unServicio= manejadorUnServicioById.ejecutar(id);
+        comandoServicio.setVehiculo(unServicio.getVehiculo());
         comandoServicio.setFechaEntrada(unServicio.getFechaEntrada());
         comandoServicio.setId(id);
         manejadorActualizarServicio.ejecutar(comandoServicio);

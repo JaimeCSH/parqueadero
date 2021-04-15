@@ -1,5 +1,6 @@
 package com.ceiba.servicio.servicio;
 
+import com.ceiba.dominio.excepcion.ExcepcionNoExiste;
 import com.ceiba.dominio.excepcion.ExcepcionServicioActivo;
 import com.ceiba.dominio.excepcion.ExcepcionServicioNoActivo;
 import com.ceiba.servicio.modelo.entidad.Servicio;
@@ -12,6 +13,7 @@ import java.time.temporal.ChronoUnit;
 public class ServicioActualizarServicio {
 
     private static final String VEHICULO_NO_ACTIVO = "No se encuentra un servicio activo para este vehículo";
+    private static final String SERVICIO_NO_EXISTE ="El servicio no existe";
     private final RepositorioServicio repositorioServicio;
 
     public ServicioActualizarServicio(RepositorioServicio repositorioServicio) {
@@ -19,7 +21,7 @@ public class ServicioActualizarServicio {
     }
 
     public void ejecutar(Servicio servicio) {
-        validarExistenciaNoActiva(servicio);
+        validarExistencia(servicio);
         estabelcerHoraSalida(servicio);
         calcularTotalHoras(servicio);
         calcularTotalAPagar(servicio);
@@ -53,10 +55,10 @@ public class ServicioActualizarServicio {
         servicio.setFechaSalida(fechaSalida);
     }
 
-    private void validarExistenciaNoActiva(Servicio servicio) {
-        boolean existeActivo = this.repositorioServicio.existeActivo(servicio.getId());
+    private void validarExistencia(Servicio servicio) {
+        boolean existeActivo = this.repositorioServicio.existe(servicio.getId());
         if(!existeActivo) {
-            throw new ExcepcionServicioNoActivo(VEHICULO_NO_ACTIVO);
+            throw new ExcepcionNoExiste(SERVICIO_NO_EXISTE);
         }
     }
 }

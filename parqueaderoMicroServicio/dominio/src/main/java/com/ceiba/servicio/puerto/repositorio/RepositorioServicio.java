@@ -31,10 +31,17 @@ public interface RepositorioServicio {
     boolean existeActivo(Long vehiculo);
 
     /**
-     * Permite validar si existe un cliente con un nombre excluyendo un id
-     * @param placa
+     * Permite validar si existe un servicio
+     * @param id
      * @return si existe o no
      */
-    //boolean existeExcluyendoId(Long id,String placa);
+    boolean existe (Long id);
+
+    /**
+     * Permite validar si existe un vehiculo para crear el servicio
+     * @param vehiculo
+     * @return si existe o no
+     */
+    boolean existeVehiculo(Long vehiculo);
 
 }
