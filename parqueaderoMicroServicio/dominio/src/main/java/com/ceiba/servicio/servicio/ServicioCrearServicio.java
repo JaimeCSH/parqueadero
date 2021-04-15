@@ -30,7 +30,7 @@ public class ServicioCrearServicio {
     }
 
     private void validarExistenciaVehiculo(Servicio servicio){
-        boolean existeVehiculo = this.repositorioServicio.existeActivo(servicio.getVehiculo());
+        boolean existeVehiculo = this.repositorioServicio.existeVehiculo(servicio.getVehiculo());
         if(!existeVehiculo) {
             throw new ExcepcionNoExiste(VEHICULO_NO_EXISTE);
         }
