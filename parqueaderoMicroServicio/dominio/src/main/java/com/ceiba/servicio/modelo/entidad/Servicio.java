@@ -45,6 +45,14 @@ public class Servicio {
 
     }
 
+    public void setVehiculo(Long vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    public void setFechaEntrada(LocalDateTime fechaEntrada) {
+        this.fechaEntrada = fechaEntrada;
+    }
+
     public void setFechaSalida(LocalDateTime fechaSalida) {
         this.fechaSalida = fechaSalida;
     }

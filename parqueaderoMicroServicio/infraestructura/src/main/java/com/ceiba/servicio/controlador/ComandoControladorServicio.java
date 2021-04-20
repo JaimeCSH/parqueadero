@@ -43,6 +43,7 @@ public class ComandoControladorServicio {
         comandoServicio.setFechaEntrada(LocalDateTime.now());
         comandoServicio.setActivo(1);
         return manejadorCrearServicio.ejecutar(comandoServicio);
+        //return new ComandoRespuesta<Long>(2L);
     }
 
     @DeleteMapping(value="/{id}")
@@ -56,10 +57,10 @@ public class ComandoControladorServicio {
     public void actualizar(@RequestBody ComandoServicio comandoServicio,@PathVariable Long id) {
 
 
-        DtoServicio unServicio= manejadorUnServicioById.ejecutar(id);
+        /*DtoServicio unServicio= manejadorUnServicioById.ejecutar(id);
         comandoServicio.setVehiculo(unServicio.getVehiculo());
         comandoServicio.setFechaEntrada(unServicio.getFechaEntrada());
-        comandoServicio.setId(id);
+        comandoServicio.setId(id);*/
         manejadorActualizarServicio.ejecutar(comandoServicio);
     }
 }

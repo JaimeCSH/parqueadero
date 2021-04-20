@@ -3,7 +3,9 @@ package com.ceiba.servicio.servicio;
 import com.ceiba.dominio.excepcion.ExcepcionNoExiste;
 import com.ceiba.dominio.excepcion.ExcepcionServicioActivo;
 import com.ceiba.dominio.excepcion.ExcepcionServicioNoActivo;
+import com.ceiba.servicio.modelo.dto.DtoServicio;
 import com.ceiba.servicio.modelo.entidad.Servicio;
+import com.ceiba.servicio.puerto.dao.DaoServicio;
 import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
 
 import java.math.BigDecimal;
@@ -15,18 +17,29 @@ public class ServicioActualizarServicio {
     private static final String VEHICULO_NO_ACTIVO = "No se encuentra un servicio activo para este vehículo";
     private static final String SERVICIO_NO_EXISTE ="El servicio no existe";
     private final RepositorioServicio repositorioServicio;
+    private final DaoServicio daoServicio;
 
-    public ServicioActualizarServicio(RepositorioServicio repositorioServicio) {
+    public ServicioActualizarServicio(RepositorioServicio repositorioServicio, DaoServicio daoServicio) {
         this.repositorioServicio = repositorioServicio;
+        this.daoServicio=daoServicio;
     }
 
     public void ejecutar(Servicio servicio) {
         validarExistencia(servicio);
+        establecerDatosEntrada(servicio);
         estabelcerHoraSalida(servicio);
         calcularTotalHoras(servicio);
         calcularTotalAPagar(servicio);
         servicio.setActivo(0);
         this.repositorioServicio.actualizar(servicio);
+    }
+
+    private void establecerDatosEntrada(Servicio servicio) {
+
+        DtoServicio unServicio= daoServicio.buscarServicioById(servicio.getId());
+        System.out.println(unServicio.getFechaEntrada());
+        servicio.setFechaEntrada(unServicio.getFechaEntrada());
+        servicio.setVehiculo(unServicio.getVehiculo());
     }
 
     public void calcularTotalHoras(Servicio servicio) {

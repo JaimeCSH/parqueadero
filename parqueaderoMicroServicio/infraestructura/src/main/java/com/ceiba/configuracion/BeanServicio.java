@@ -5,6 +5,7 @@ import com.ceiba.cliente.servicio.ServicioCrearCliente;
 import com.ceiba.cliente.servicio.ServicioEliminarCliente;
 import com.ceiba.cliente.servicio.ServicioActualizarCliente;
 
+import com.ceiba.servicio.puerto.dao.DaoServicio;
 import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
 import com.ceiba.servicio.servicio.ServicioActualizarServicio;
 import com.ceiba.servicio.servicio.ServicioCrearServicio;
@@ -82,8 +83,8 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioActualizarServicio servicioActualizarServicio(RepositorioServicio repositorioServicio) {
-        return new ServicioActualizarServicio(repositorioServicio);
+    public ServicioActualizarServicio servicioActualizarServicio(RepositorioServicio repositorioServicio, DaoServicio daoServicio) {
+        return new ServicioActualizarServicio(repositorioServicio, daoServicio);
     }
 	
 

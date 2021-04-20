@@ -20,6 +20,10 @@ public class ManejadorUnServicioById {
 
     public DtoServicio ejecutar(Long id){
 
-        this.repositorioServicio.existe(id);
-        return this.daoServicio.buscarServicioById(id); }
+        boolean a=this.repositorioServicio.existe(id);
+        if (a){
+            return this.daoServicio.buscarServicioById(id);
+        }
+        else return null;
+    }
 }

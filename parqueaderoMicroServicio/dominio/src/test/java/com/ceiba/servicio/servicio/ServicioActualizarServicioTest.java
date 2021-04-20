@@ -5,6 +5,7 @@ import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionNoExiste;
 import com.ceiba.dominio.excepcion.ExcepcionServicioNoActivo;
 import com.ceiba.servicio.modelo.entidad.Servicio;
+import com.ceiba.servicio.puerto.dao.DaoServicio;
 import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
 import com.ceiba.servicio.servicio.testdatabuilder.ServicioTestDataBuilder;
 import org.junit.Assert;
@@ -23,7 +24,8 @@ public class ServicioActualizarServicioTest {
         // arrange
         Servicio servicio = new ServicioTestDataBuilder().build();
         RepositorioServicio repositorioServicio = Mockito.mock(RepositorioServicio.class);
-        ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio);
+        DaoServicio daoServicio = Mockito.mock(DaoServicio.class);
+        ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio,daoServicio);
         Mockito.when(repositorioServicio.existeActivo(Mockito.anyLong())).thenReturn(false);
         // act - assert
         BasePrueba.assertThrows(() -> servicioActualizarServicio.ejecutar(servicio), ExcepcionNoExiste.class,"El servicio no existe");
@@ -34,7 +36,8 @@ public class ServicioActualizarServicioTest {
         // arrange
         Servicio servicio = new ServicioTestDataBuilder().conFechaSalida(LocalDateTime.now().plusHours(2).plusMinutes(15)).build();
         RepositorioServicio repositorioServicio = Mockito.mock(RepositorioServicio.class);
-        ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio);
+        DaoServicio daoServicio = Mockito.mock(DaoServicio.class);
+        ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio,daoServicio);
         // act -
         servicioActualizarServicio.calcularTotalHoras(servicio);
         // assert
@@ -46,7 +49,8 @@ public class ServicioActualizarServicioTest {
         // arrange
         Servicio servicio = new ServicioTestDataBuilder().conFechaSalida(LocalDateTime.now().plusHours(2)).build();
         RepositorioServicio repositorioServicio = Mockito.mock(RepositorioServicio.class);
-        ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio);
+        DaoServicio daoServicio = Mockito.mock(DaoServicio.class);
+        ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio,daoServicio);
         // act -
         servicioActualizarServicio.calcularTotalHoras(servicio);
         // assert
@@ -58,7 +62,8 @@ public class ServicioActualizarServicioTest {
         // arrange
         Servicio servicio = new ServicioTestDataBuilder().conFechaSalida(LocalDateTime.now().plusHours(2)).build();
         RepositorioServicio repositorioServicio = Mockito.mock(RepositorioServicio.class);
-        ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio);
+        DaoServicio daoServicio = Mockito.mock(DaoServicio.class);
+        ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio,daoServicio);
         // act -
         servicioActualizarServicio.calcularTotalHoras(servicio);
         servicioActualizarServicio.calcularTotalAPagar(servicio);
@@ -71,7 +76,8 @@ public class ServicioActualizarServicioTest {
         // arrange
         Servicio servicio = new ServicioTestDataBuilder().conFechaSalida(LocalDateTime.now().plusHours(2).plusMinutes(34)).build();
         RepositorioServicio repositorioServicio = Mockito.mock(RepositorioServicio.class);
-        ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio);
+        DaoServicio daoServicio = Mockito.mock(DaoServicio.class);
+        ServicioActualizarServicio servicioActualizarServicio = new ServicioActualizarServicio(repositorioServicio,daoServicio);
         // act
         servicioActualizarServicio.calcularTotalHoras(servicio);
         servicioActualizarServicio.calcularTotalAPagar(servicio);
