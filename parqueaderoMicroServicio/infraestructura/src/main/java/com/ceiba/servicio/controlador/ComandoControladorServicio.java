@@ -25,16 +25,13 @@ public class ComandoControladorServicio {
     private final ManejadorActualizarServicio  manejadorActualizarServicio ;
     private final ManejadorEliminarServicio  manejadorEliminarServicio ;
 
-    private final ManejadorUnServicioById manejadorUnServicioById;
 
     public ComandoControladorServicio(ManejadorCrearServicio manejadorCrearServicio,
                                       ManejadorActualizarServicio  manejadorActualizarServicio,
-                                      ManejadorEliminarServicio  manejadorEliminarServicio,
-                                      ManejadorUnServicioById manejadorUnServicioById){
+                                      ManejadorEliminarServicio  manejadorEliminarServicio){
         this.manejadorCrearServicio=manejadorCrearServicio;
         this.manejadorActualizarServicio=manejadorActualizarServicio;
         this.manejadorEliminarServicio=manejadorEliminarServicio;
-        this.manejadorUnServicioById=manejadorUnServicioById;
     }
 
     @PostMapping
@@ -43,7 +40,6 @@ public class ComandoControladorServicio {
         comandoServicio.setFechaEntrada(LocalDateTime.now());
         comandoServicio.setActivo(1);
         return manejadorCrearServicio.ejecutar(comandoServicio);
-        //return new ComandoRespuesta<Long>(2L);
     }
 
     @DeleteMapping(value="/{id}")
@@ -56,11 +52,6 @@ public class ComandoControladorServicio {
     @ApiOperation("Actualizar servicio")
     public void actualizar(@RequestBody ComandoServicio comandoServicio,@PathVariable Long id) {
 
-
-        /*DtoServicio unServicio= manejadorUnServicioById.ejecutar(id);
-        comandoServicio.setVehiculo(unServicio.getVehiculo());
-        comandoServicio.setFechaEntrada(unServicio.getFechaEntrada());
-        comandoServicio.setId(id);*/
         manejadorActualizarServicio.ejecutar(comandoServicio);
     }
 }
