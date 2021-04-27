@@ -1,7 +1,5 @@
 package com.ceiba.vehiculo.controlador;
 
-import com.ceiba.cliente.consulta.ManejadorListarClientes;
-import com.ceiba.cliente.modelo.dto.DtoCliente;
 import com.ceiba.vehiculo.consulta.ManejadorListarVehiculos;
 import com.ceiba.vehiculo.modelo.dto.DtoVehiculo;
 import io.swagger.annotations.Api;

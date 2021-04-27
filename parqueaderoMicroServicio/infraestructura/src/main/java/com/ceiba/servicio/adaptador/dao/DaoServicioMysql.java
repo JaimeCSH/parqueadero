@@ -35,7 +35,6 @@ public class DaoServicioMysql implements DaoServicio {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
         List<DtoServicio> servicios=this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlServicioByIdServicio, paramSource,new MapeoServicio());
-        DtoServicio unServicioDto=servicios.get(0);
-        return unServicioDto;
+        return  servicios.get(0);
     }
 }

@@ -2,7 +2,6 @@ package com.ceiba.servicio.controlador;
 
 import com.ceiba.servicio.consulta.ManejadorListarServicios;
 import com.ceiba.servicio.modelo.dto.DtoServicio;
-import com.ceiba.vehiculo.modelo.dto.DtoVehiculo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
