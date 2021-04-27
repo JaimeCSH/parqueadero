@@ -15,10 +15,10 @@ public class DaoServicioMysql implements DaoServicio {
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace="servicio", value="listar")
-    private static String sqlListar;
+    private static String sqlListarServicio;
 
     @SqlStatement(namespace="servicio", value="servicioById")
-    private static String sqlServicioById;
+    private static String sqlServicioByIdServicio;
 
     public DaoServicioMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -26,7 +26,7 @@ public class DaoServicioMysql implements DaoServicio {
 
     @Override
     public List<DtoServicio> listar() {
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoServicio());
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListarServicio, new MapeoServicio());
     }
 
     @Override
@@ -34,7 +34,7 @@ public class DaoServicioMysql implements DaoServicio {
 
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
-        List<DtoServicio> servicios=this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlServicioById, paramSource,new MapeoServicio());
+        List<DtoServicio> servicios=this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlServicioByIdServicio, paramSource,new MapeoServicio());
         DtoServicio unServicioDto=servicios.get(0);
         return unServicioDto;
     }

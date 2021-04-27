@@ -9,25 +9,26 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class RepositorioServicioMysql implements RepositorioServicio {
+
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace="servicio", value="crear")
-    private static String sqlCrear;
+    private static String sqlCrearServicio;
 
     @SqlStatement(namespace="servicio", value="actualizar")
-    private static String sqlActualizar;
+    private static String sqlActualizarServicio;
 
     @SqlStatement(namespace="servicio", value="eliminar")
-    private static String sqlEliminar;
+    private static String sqlEliminarServicio;
 
     @SqlStatement(namespace="servicio", value="existe")
-    private static String sqlExiste;
+    private static String sqlExisteServicio;
 
     @SqlStatement(namespace="servicio", value="existeActivo")
-    private static String sqlExisteActivo;
+    private static String sqlExisteActivoServicio;
 
     @SqlStatement(namespace="servicio", value="existeElVehiculo")
-    private static String sqlExisteVehiculo;
+    private static String sqlExisteVehiculoServicio;
 
 
     public RepositorioServicioMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
@@ -36,43 +37,39 @@ public class RepositorioServicioMysql implements RepositorioServicio {
 
     @Override
     public Long crear(Servicio servicio) {
-        return this.customNamedParameterJdbcTemplate.crear(servicio, sqlCrear);
+        return this.customNamedParameterJdbcTemplate.crear(servicio, sqlCrearServicio);
     }
 
     @Override
     public void eliminar(Long id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
-
-        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminarServicio, paramSource);
     }
 
     @Override
     public boolean existeActivo(Long vehiculo) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("vehiculo", vehiculo);
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteActivo,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteActivoServicio,paramSource, Boolean.class);
     }
     @Override
     public void actualizar(Servicio servicio) {
-        this.customNamedParameterJdbcTemplate.actualizar(servicio, sqlActualizar);
+        this.customNamedParameterJdbcTemplate.actualizar(servicio, sqlActualizarServicio);
     }
 
     @Override
     public boolean existeVehiculo(Long vehiculo) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("vehiculo", vehiculo);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteVehiculo,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteVehiculoServicio,paramSource, Boolean.class);
     }
 
     @Override
     public boolean existe(Long id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
-
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
-
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteServicio,paramSource, Boolean.class);
     }
 
 

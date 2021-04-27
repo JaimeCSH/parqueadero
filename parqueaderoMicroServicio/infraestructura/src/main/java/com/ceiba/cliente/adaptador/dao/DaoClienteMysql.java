@@ -16,7 +16,7 @@ public class DaoClienteMysql implements DaoCliente {
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace="cliente", value="listar")
-    private static String sqlListar;
+    private static String sqlListarCliente;
 
     public DaoClienteMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -24,6 +24,6 @@ public class DaoClienteMysql implements DaoCliente {
 
     @Override
     public List<DtoCliente> listar() {
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoCliente());
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListarCliente, new MapeoCliente());
     }
 }
