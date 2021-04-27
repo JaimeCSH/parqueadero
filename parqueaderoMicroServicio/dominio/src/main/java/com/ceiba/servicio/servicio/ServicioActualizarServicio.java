@@ -46,10 +46,10 @@ public class ServicioActualizarServicio {
 
         LocalDateTime fechayHoraInicial=servicio.getFechaEntrada();
         LocalDateTime fechayHoraFinal=servicio.getFechaSalida();
-        Long minutes = ChronoUnit.MINUTES.between(fechayHoraInicial,fechayHoraFinal);
+        Long millis = ChronoUnit.MILLIS.between(fechayHoraInicial,fechayHoraFinal);
         Long horas = ChronoUnit.HOURS.between(fechayHoraInicial,fechayHoraFinal);
 
-        if(minutes%60!=0){
+        if(millis%3600000!=0){
             horas++;
         }
 

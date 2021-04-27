@@ -1,1 +1,1 @@
-select count(1) from servicio where id = :id
+select count(1) from servicio where id = :id and activo = 1

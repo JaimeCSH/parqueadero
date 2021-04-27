@@ -2,6 +2,7 @@ package com.ceiba.servicio.controlador;
 
 import com.ceiba.ApplicationMock;
 import com.ceiba.servicio.comando.ComandoServicio;
+import com.ceiba.servicio.modelo.dto.DtoServicio;
 import com.ceiba.servicio.modelo.entidad.Servicio;
 import com.ceiba.servicio.puerto.dao.DaoServicio;
 import com.ceiba.servicio.servicio.testdatabuilder.ComandoServicioTestDataBuilder;
@@ -17,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -42,13 +44,17 @@ public class ComandoControladorServicioTest {
     public void crear() throws Exception{
         // arrange
         ComandoServicio servicio = new ComandoServicioTestDataBuilder().build();
-        // act - assert
+        // act
         mocMvc.perform(post("/servicios")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(servicio)))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'valor': 2}"));
 
+        // assert
+        List servicios=daoServicio.listar();
+        DtoServicio unServicio= (DtoServicio) servicios.get(1);
+        Assert.assertTrue(unServicio.getId()==2);
     }
 
     @Test
@@ -58,11 +64,18 @@ public class ComandoControladorServicioTest {
         Long id = 1L;
         ComandoServicio servicio = new ComandoServicioTestDataBuilder().build();
         servicio.setId(id);
-        // act - assert
+        // act
         mocMvc.perform(put("/servicios/{id}",id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(servicio)))
                 .andExpect(status().isOk());
+
+
+        // assert
+        List servicios=daoServicio.listar();
+        DtoServicio unservicio= (DtoServicio) servicios.get(0);
+        int compareTo = unservicio.getVolorAPagar().compareTo(BigDecimal.valueOf(2000L));
+        Assert.assertTrue(compareTo==0);
     }
 
     @Test

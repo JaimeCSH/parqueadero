@@ -2,11 +2,15 @@ package com.ceiba.cliente.controlador;
 
 import com.ceiba.ApplicationMock;
 import com.ceiba.cliente.comando.ComandoCliente;
+import com.ceiba.cliente.modelo.dto.DtoCliente;
 import com.ceiba.cliente.puerto.dao.DaoCliente;
 import com.ceiba.cliente.servicio.testdatabuilder.ComandoClienteTestDataBuilder;
+import com.ceiba.servicio.modelo.dto.DtoServicio;
 import com.ceiba.servicio.puerto.dao.DaoServicio;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -36,23 +40,32 @@ public class ComandoControladorClienteTest {
     private DaoCliente daoCliente;
 
     @Test
+    @Order(1)
     public void crear() throws Exception{
         // arrange
         ComandoCliente cliente = new ComandoClienteTestDataBuilder().build();
 
-        // act - assert
+        // act
         mocMvc.perform(post("/clientes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(cliente)))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'valor': 2}"));
+
+        // assert
+        List clientes = daoCliente.listar();
+        DtoCliente unCliente = (DtoCliente) clientes.get(1);
+        Assert.assertTrue(unCliente.getId()==2);
+
     }
 
     @Test
+    @Order(2)
     public void actualizar() throws Exception{
         // arrange
         Long id = 2L;
         ComandoCliente cliente = new ComandoClienteTestDataBuilder().build();
+
         // act - assert
         mocMvc.perform(put("/clientes/{id}",id)
                 .contentType(MediaType.APPLICATION_JSON)

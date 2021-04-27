@@ -3,8 +3,11 @@ package com.ceiba.vehiculo.controlador;
 
 import com.ceiba.ApplicationMock;
 import com.ceiba.vehiculo.comando.ComandoVehiculo;
+import com.ceiba.vehiculo.modelo.dto.DtoVehiculo;
+import com.ceiba.vehiculo.puerto.dao.DaoVehiculo;
 import com.ceiba.vehiculo.servicio.testdatabuilder.ComandoVehiculoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -29,6 +34,9 @@ public class ComandoControladorVehiculoTest {
     @Autowired
     private MockMvc mocMvc;
 
+    @Autowired
+    private DaoVehiculo daoVehiculo;
+
     @Test
     public void crear() throws Exception{
         // arrange
@@ -38,8 +46,11 @@ public class ComandoControladorVehiculoTest {
         mocMvc.perform(post("/vehiculos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(vehiculo)))
-                .andExpect(status().isOk())
                 .andExpect(content().json("{'valor': 3}"));
+
+        List vehiculos=daoVehiculo.listar();
+        DtoVehiculo unVehiculo= (DtoVehiculo) vehiculos.get(2);
+        Assert.assertTrue(unVehiculo.getId()==3);
     }
 
     @Test

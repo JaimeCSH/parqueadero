@@ -1,6 +1,5 @@
 package com.ceiba.vehiculo.servicio;
 
-import com.ceiba.cliente.puerto.repositorio.RepositorioCliente;
 import com.ceiba.vehiculo.puerto.repositorio.RepositorioVehiculo;
 
 public class ServicioEliminarVehiculo {
