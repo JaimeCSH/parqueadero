@@ -6,10 +6,10 @@ pool:
 
 steps:
 - task: Gradle@2
-  displayName: Build app
+  displayName: Gradle Build
   inputs:
-    workingDirectory: ''
-    gradleWrapperFile 'parqueaderoMicroServicio/gradlew'
+    workingDirectory: 'parqueaderoMicroServicio/'
+    gradleWrapperFile: 'parqueaderoMicroServicio/gradlew'
     gradleOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
@@ -18,3 +18,14 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'build'
     options: '-x test'
+- task: Gradle@2
+  displayName: Gradle test
+  inputs:
+    workingDirectory: 'parqueaderoMicroServicio/'
+    gradleWrapperFile: 'parqueaderoMicroServicio/gradlew'
+    tasks: 'test'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: false
+    spotBugsAnalysis: false
